@@ -101,6 +101,8 @@ public class Simulacao {
     // para processar uma função de forma assincrona
     public Future<String> exampleThree() {
         CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(() -> "hello");
+        
+        //thenApply pega o retorno e usa em uma função
         CompletableFuture<String> process = completableFuture.thenApply(s -> s + " world");
         return process;
     }
