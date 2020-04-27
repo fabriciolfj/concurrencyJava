@@ -13,7 +13,7 @@ public class Simulacao {
         new Simulacao().test();
     }
 
-    // thenCompose vs themApply
+    // thenCompose(usa o estágio anterior como argumento. Ele achatará e retornará um futuro diretamente com o resultado, em vez de um futuro aninhado, como observamos em thenApply ()) vs themApply (é útil quando queremos transformar o resultado de uma chamada )
     public void test() throws ExecutionException, InterruptedException {
         CompletableFuture<String> completableFuture1 = CompletableFuture.supplyAsync(() -> "hello")
                 .thenCompose(s -> CompletableFuture.supplyAsync(() ->s + "world"));
