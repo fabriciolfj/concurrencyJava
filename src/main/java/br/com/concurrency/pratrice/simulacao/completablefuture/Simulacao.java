@@ -13,6 +13,21 @@ public class Simulacao {
         new Simulacao().test();
     }
 
+    public void test2() {
+        var execute = CompletableFuture.supplyAsync(() -> "Teste");
+
+        execute.thenAcceptAsync(s -> System.out.println(s))
+                .exceptionally(e -> {
+                    System.out.println(e.getMessage());
+                    return null;
+                });
+
+        execute.thenAcceptAsync(s -> System.out.println(s))
+                .handle((s, e) -> {
+                    throw new RuntimeException(e);
+                });
+    }
+
     // thenCompose(usa o estágio anterior como argumento. Ele achatará e retornará um futuro diretamente com o resultado, em vez de um futuro aninhado, como observamos em thenApply ()) vs themApply (é útil quando queremos transformar o resultado de uma chamada )
     public void test() throws ExecutionException, InterruptedException {
         CompletableFuture<String> completableFuture1 = CompletableFuture.supplyAsync(() -> "hello")
